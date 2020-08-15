@@ -198,11 +198,11 @@ void watchdog3_isr() {
   if ( _WDT3 ) _WDT3->watchdog_isr();
 }
 
-WDT_FUNC void WDT_OPT::pause() {
+WDT_FUNC void WDT_OPT::pauseWDT3() {
   CCM_CCGR5 = 0xFFFFFFCF & CCM_CCGR5;  /* disabe WDOG3 clocks */
 }
 
-WDT_FUNC void WDT_OPT::resume() {
+WDT_FUNC void WDT_OPT::resumeWDT3() {
   CCM_CCGR5 |= (3UL << 4); /* enable WDOG3 clocks */
 }
 
