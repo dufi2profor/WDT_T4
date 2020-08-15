@@ -198,6 +198,14 @@ void watchdog3_isr() {
   if ( _WDT3 ) _WDT3->watchdog_isr();
 }
 
+WDT_FUNC void WDT_OPT::pause() {
+  CCM_CCGR5 = 0xFFFFFFCF & CCM_CCGR5;  /* disabe WDOG3 clocks */
+}
+
+WDT_FUNC void WDT_OPT::resume() {
+  CCM_CCGR5 |= (3UL << 4); /* enable WDOG3 clocks */
+}
+
 WDT_FUNC void WDT_OPT::watchdog_isr() {
   if ( watchdog_class_handler ) watchdog_class_handler();
   if ( WDT3 == _device ) WDOGb_CS(_device) = WDOG_CS_FLG;
