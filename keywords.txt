@@ -1,0 +1,39 @@
+#######################################
+# Syntax Coloring Map For debug_lvc
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+WDT1				KEYWORD1
+WDT2				KEYWORD1
+WDT3				KEYWORD1
+EWM					KEYWORD1
+wdt					KEYWORD1
+WDT_timings_t		KEYWORD1
+WDT_T4				KEYWORD2
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin				KEYWORD2
+callback			KEYWORD2
+reset				KEYWORD2
+feed				KEYWORD2
+expired				KEYWORD2
+pause				KEYWORD2
+resume				KEYWORD2
+trigger				KEYWORD2
+timeout				KEZWORD2
+window				KEYWORD2
+pin					KEYWORD2
+clock				KEYWORD2
+lp_suspend			KEYWORD2
+input				KEYWORD2
+update				KEYWORD2
+cmd32en				KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
