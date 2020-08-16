@@ -56,8 +56,8 @@ WDT_CLASS class WDT_T4 : public WDT_T4_Base {
     void reset();
     void feed();
     bool expired();
-    void pauseWDT3();
-    void resumeWDT3();
+    void pause();
+    void resume();
   private:
     watchdog_class_ptr watchdog_class_handler;
     void watchdog_isr();
