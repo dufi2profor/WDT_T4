@@ -198,12 +198,40 @@ void watchdog3_isr() {
   if ( _WDT3 ) _WDT3->watchdog_isr();
 }
 
-WDT_FUNC void WDT_OPT::pauseWDT3() {
-  CCM_CCGR5 = 0xFFFFFFCF & CCM_CCGR5;  /* disabe WDOG3 clocks */
+WDT_FUNC void WDT_OPT::pause() {
+  if ( _device == EWM ) {
+    return;
+  }
+  if ( _device == WDT1 || _device == WDT2 ) {
+  } else {
+	__disable_irq();
+    if ( WDOGb_CS(_device) & WDOG_CS_CMD32EN )	{
+		WDOGb_CNT32(_device) = 0xD928C520;
+    } else {
+      WDOGb_CNT(_device) = 0xC520;
+      WDOGb_CNT(_device) = 0xD928;
+    }		
+	WDOGb_CS(_device) &= ~WDOG_CS_EN;
+	__enable_irq();
+  }
 }
 
-WDT_FUNC void WDT_OPT::resumeWDT3() {
-  CCM_CCGR5 |= (3UL << 4); /* enable WDOG3 clocks */
+WDT_FUNC void WDT_OPT::resume() {
+  if ( _device == EWM ) {
+    return;
+  }
+  if ( _device == WDT1 || _device == WDT2 ) {
+  } else {
+	__disable_irq();
+    if ( WDOGb_CS(_device) & WDOG_CS_CMD32EN )	{
+		WDOGb_CNT32(_device) = 0xD928C520;
+    } else {
+      WDOGb_CNT(_device) = 0xC520;
+      WDOGb_CNT(_device) = 0xD928;
+    }		
+	WDOGb_CS(_device) |= WDOG_CS_EN;
+	__enable_irq();
+  }
 }
 
 WDT_FUNC void WDT_OPT::watchdog_isr() {
